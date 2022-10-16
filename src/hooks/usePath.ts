@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-const TOKEN_KEY = "auth-token";
+import { getToken } from "../lib/localStorage";
 
 const usePath = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = getToken();
 
     if (token) {
       navigate("/todo");
