@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import usePath from "../hooks/usePath";
 import axios from "../lib/axios";
 import { setToken } from "../lib/localStorage";
 
@@ -8,6 +9,7 @@ type Values = {
 };
 
 const Auth = () => {
+  usePath();
   const navigate = useNavigate();
   const [values, setValues] = useState<Values>();
   const [isSigninForm, setIsSigninForm] = useState(true);
