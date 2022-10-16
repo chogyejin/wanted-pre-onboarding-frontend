@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePath from "../hooks/usePath";
+import useValidation from "../hooks/useValidation";
 import axios from "../lib/axios";
 import { setToken } from "../lib/localStorage";
-
-type Values = {
-  [key: string]: string;
-};
 
 const Auth = () => {
   usePath();
   const navigate = useNavigate();
-  const [values, setValues] = useState<Values>();
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [isValid] = useValidation(values);
   const [isSigninForm, setIsSigninForm] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +71,9 @@ const Auth = () => {
           placeholder="비밀번호를 입력해주세요."
           onChange={handleChange}
         />
-        <button type="submit">{isSigninForm ? "로그인" : "회원가입"}</button>
+        <button type="submit" disabled={!isValid}>
+          {isSigninForm ? "로그인" : "회원가입"}
+        </button>
       </form>
       <button type="button" onClick={toggleButton}>
         {isSigninForm ? "회원가입 버튼으로" : "로그인 버튼으로"}
