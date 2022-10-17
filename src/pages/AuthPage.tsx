@@ -29,12 +29,10 @@ const Auth = () => {
       );
 
       if (response.status === 200) {
-        console.log(response);
         alert("로그인 성공");
         navigate("/todo");
         setToken(response.data.access_token);
       } else {
-        console.log(response);
         alert("로그인에 실패했어요");
       }
     } else {
@@ -44,7 +42,6 @@ const Auth = () => {
       );
 
       if (response.status === 201) {
-        console.log(response);
         alert("회원가입 성공");
       } else {
         alert("다시 시도하세요");
