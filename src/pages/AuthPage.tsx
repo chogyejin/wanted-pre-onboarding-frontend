@@ -29,9 +29,8 @@ const Auth = () => {
       );
 
       if (response.status === 200) {
-        alert("로그인 성공");
-        navigate("/todo");
         setToken(response.data.access_token);
+        navigate("/todo");
       } else {
         alert("로그인에 실패했어요");
       }

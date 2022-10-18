@@ -27,7 +27,7 @@ const TodoItem = ({ todoObject, onDeleteClick, onEditClick }: Props) => {
   };
 
   const handleEditClick = async (id: string) => {
-    if (!window.confirm("수정할까요??")) {
+    if (!window.confirm("수정할까요?")) {
       return;
     }
 
