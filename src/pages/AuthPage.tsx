@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePath from "../hooks/usePath";
 import useValidation from "../hooks/useValidation";
-import axios from "../lib/axios";
+import { requestSignin, requestSignup } from "../lib/apis";
 import { setToken } from "../lib/localStorage";
 
 const Auth = () => {
@@ -23,10 +23,7 @@ const Auth = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSigninForm) {
-      const response = await axios.post<{ access_token: string }>(
-        `/auth/signin`,
-        values
-      );
+      const response = await requestSignin(values);
 
       if (response.status === 200) {
         setToken(response.data.access_token);
@@ -35,10 +32,7 @@ const Auth = () => {
         alert("로그인에 실패했어요");
       }
     } else {
-      const response = await axios.post<{ access_token: string }>(
-        `/auth/signup`,
-        values
-      );
+      const response = await requestSignup(values);
 
       if (response.status === 201) {
         alert("회원가입 성공");

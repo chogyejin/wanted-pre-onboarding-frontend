@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { editTodo, Todo } from "../lib/apis";
 import axios from "../lib/axios";
-import { Todo } from "../pages/TodoListPage";
 
 interface Props {
   todoObject: Todo;
@@ -31,9 +31,11 @@ const TodoItem = ({ todoObject, onDeleteClick, onEditClick }: Props) => {
       return;
     }
 
-    const response = await axios.put<Todo>(`/todos/${id}`, {
-      todo: todoText ? todoText : todo,
-      isCompleted: isChecked,
+    const response = await editTodo({
+      id,
+      prevTodo: todo,
+      newTodo: todoText,
+      isChecked,
     });
 
     if (response.status === 200) {
