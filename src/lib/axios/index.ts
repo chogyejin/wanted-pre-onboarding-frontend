@@ -5,8 +5,19 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-const AUTH_TOKEN = getToken();
+instance.interceptors.request.use(
+  (config) => {
+    if (config.headers) {
+      const token = getToken();
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
 
-instance.defaults.headers.common["Authorization"] = `Bearer ${AUTH_TOKEN}`;
+    return config;
+  },
+  (error) => {
+    console.error(error);
+    return Promise.reject(error);
+  }
+);
 
 export default instance;
