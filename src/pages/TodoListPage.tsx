@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import TodoForm from "../components/TodoForm";
 import TodoItem from "../components/TodoItem";
 import usePath from "../hooks/usePath";
-import usePosts from "../hooks/usePosts";
+import useTodos from "../hooks/useTodos";
 
 const TodoListPage = () => {
   usePath();
@@ -12,7 +12,7 @@ const TodoListPage = () => {
     updateAfterSubmit,
     updateAfterEdit,
     updateAfterDelete,
-  } = usePosts();
+  } = useTodos();
 
   if (isLoading) {
     return <div>로딩 중...</div>;
