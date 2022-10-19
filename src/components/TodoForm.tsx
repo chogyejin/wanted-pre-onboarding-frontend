@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { useRef, useState } from "react";
 import { postTodo, Todo } from "../lib/apis";
 
@@ -30,7 +31,7 @@ const TodoForm = ({ onTodoSubmit }: Props) => {
   };
 
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit}>
         <input
           ref={inputRef}
@@ -40,8 +41,12 @@ const TodoForm = ({ onTodoSubmit }: Props) => {
         />
         <button>추가</button>
       </form>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin-bottom: 20px;
+`;
 
 export default TodoForm;

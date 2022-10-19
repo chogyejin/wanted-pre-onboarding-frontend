@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { useState } from "react";
 import { editTodo, Todo } from "../lib/apis";
 import axios from "../lib/axios";
@@ -61,35 +62,55 @@ const TodoItem = ({ todoObject, onDeleteClick, onEditClick }: Props) => {
   };
 
   return (
-    <div>
-      <div>{todo}</div>
-      <div>{isCompleted ? "완료" : "미완료"}</div>
-      {!isEditing && (
-        <button type="button" onClick={handleisEditingClick}>
-          수정
-        </button>
-      )}
-      {isEditing && (
-        <div>
+    <Container>
+      <Content>
+        {isEditing ? (
           <input
             type="text"
             placeholder="변경할 내용을 입력하세요"
             onChange={handleChange}
           />
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          <button onClick={() => handleEditClick(id)}>수정하기</button>
-          <button onClick={handleCancelClick}>수정 취소</button>
-        </div>
-      )}
-      <button type="button" onClick={() => handleDeleteClick(id)}>
-        삭제
-      </button>
-    </div>
+        ) : (
+          <span>{todo}</span>
+        )}
+      </Content>
+      <span>{isCompleted ? "✅" : "❌"}</span>
+      <div>
+        {!isEditing && (
+          <button type="button" onClick={handleisEditingClick}>
+            수정
+          </button>
+        )}
+        {isEditing && (
+          <>
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
+            <button onClick={() => handleEditClick(id)}>확인</button>
+            <button onClick={handleCancelClick}>수정 취소</button>
+          </>
+        )}
+        <button type="button" onClick={() => handleDeleteClick(id)}>
+          삭제
+        </button>
+      </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  background-color: #e8e8e8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
+
+const Content = styled.div`
+  width: 300px;
+`;
 
 export default TodoItem;
